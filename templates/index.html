@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>4chan Media Gallery</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        h1 {
+            color: #e0e0e0;
+            margin-bottom: 8px;
+        }
+
+        .count {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+            list-style: none;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            background: #1e1e1e;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            aspect-ratio: 16 / 10;
+        }
+
+        .gallery-item img,
+        .gallery-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #0a0a0a;
+            display: block;
+        }
+
+        .badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: 600;
+            pointer-events: none;
+        }
+
+        .item-link {
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>4chan Media Gallery</h1>
+        <p class="count">{{ media_list|length }} media items found</p>
+    </header>
+
+    <ul class="gallery">
+        {% for item in media_list %}
+        <li class="gallery-item">
+            {% if item.is_video %}
+            <span class="badge">{{ item.ext[1:] }}</span>
+            <video controls preload="none" poster="{{ item.thumb }}" src="{{ item.url }}"></video>
+            {% else %}
+            <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer" class="item-link">
+                <img src="{{ item.thumb }}" alt="{{ item.filename }}" loading="lazy">
+            </a>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+
+</html>
+

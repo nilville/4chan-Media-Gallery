@@ -1,0 +1,725 @@
+/* ==========================================================================
+   4chan Official Yotsuba Theme & Aesthetic Stylesheet
+   ========================================================================== */
+
+:root {
+  --bg-body: #FFFFEE;
+  --bg-post: #F0E0D6;
+  --bg-post-hover: #F6EAE1;
+  --bg-form-th: #EA8;
+  --bg-form: #EEAA88;
+  --bg-form-input: #FFFFFF;
+  --bg-banner: #F0E0D6;
+  
+  --border-post: #D9BFB7;
+  --border-form: #B7C5D9;
+  --border-dark: #800000;
+  --border-subtle: #CCA;
+  
+  --text-primary: #800000;
+  --text-crimson: #AF0A0F;
+  --text-subject: #0F0C5D;
+  --text-name: #117743;
+  --text-trip: #228854;
+  --text-greentext: #789922;
+  --text-muted: #707070;
+  --text-dark: #000000;
+  --text-link: #34345C;
+  --text-link-hover: #DD0000;
+  
+  --badge-video: #AF0A0F;
+  --badge-img: #34345C;
+  
+  --font-main: Arial, Helvetica, sans-serif;
+  --font-mono: monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-body);
+  color: var(--text-dark);
+  font-family: var(--font-main);
+  font-size: 13px;
+  line-height: 1.4;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0 0 60px 0;
+}
+
+a {
+  color: var(--text-link);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--text-link-hover);
+  text-decoration: underline;
+}
+
+/* ----------------- Top & Bottom Board Navigation Bar ----------------- */
+.board-nav-bar {
+  background: var(--bg-body);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 4px 8px;
+  font-size: 11px;
+  text-align: center;
+  color: var(--text-muted);
+  user-select: none;
+  line-height: 1.6;
+}
+
+.board-nav-bar.bottom {
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: none;
+  margin-top: 40px;
+}
+
+.board-nav-bar a {
+  color: var(--text-link);
+  padding: 0 2px;
+}
+
+.board-nav-bar a:hover {
+  color: var(--text-link-hover);
+}
+
+.nav-section {
+  display: inline-block;
+  margin: 0 4px;
+}
+
+/* ----------------- Board Header & Banner ----------------- */
+.board-header {
+  text-align: center;
+  padding: 16px 12px 10px 12px;
+}
+
+.board-banner-clover {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+
+.board-title {
+  color: var(--text-crimson);
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: -0.5px;
+  margin: 0 0 4px 0;
+  font-family: Tahoma, Arial, sans-serif;
+}
+
+.board-subtitle {
+  font-size: 12px;
+  color: var(--text-dark);
+  margin-bottom: 12px;
+}
+
+.divider-line {
+  border: none;
+  border-top: 1px solid var(--border-post);
+  max-width: 96%;
+  margin: 12px auto;
+}
+
+/* ----------------- Form Container (4chan Post Form Style) ----------------- */
+.post-form-container {
+  display: flex;
+  justify-content: center;
+  margin: 10px auto 20px auto;
+  padding: 0 10px;
+}
+
+.post-form-table {
+  background-color: var(--bg-post);
+  border: 1px solid var(--border-dark);
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 680px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.post-form-table td,
+.post-form-table th {
+  padding: 6px 8px;
+  border: 1px solid var(--border-post);
+  font-size: 12px;
+}
+
+.post-form-table th {
+  background-color: var(--bg-form-th);
+  color: var(--text-primary);
+  font-weight: bold;
+  width: 110px;
+  text-align: right;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.post-form-input {
+  width: 100%;
+  padding: 5px 8px;
+  font-family: var(--font-main);
+  font-size: 12px;
+  border: 1px solid #aaa;
+  background-color: var(--bg-form-input);
+  outline: none;
+}
+
+.post-form-input:focus {
+  border-color: var(--text-primary);
+  box-shadow: 0 0 2px var(--text-primary);
+}
+
+.chan-button {
+  background: linear-gradient(180deg, #FAEDE5 0%, #E2CDC2 100%);
+  border: 1px solid var(--border-dark);
+  color: var(--text-primary);
+  font-family: var(--font-main);
+  font-size: 11px;
+  font-weight: bold;
+  padding: 3px 12px;
+  cursor: pointer;
+  border-radius: 2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.chan-button:hover {
+  background: linear-gradient(180deg, #FFFFFF 0%, #EBD4C7 100%);
+  border-color: var(--text-crimson);
+  color: var(--text-crimson);
+}
+
+.chan-button:active {
+  background: #D9BFB7;
+}
+
+.chan-button.primary {
+  background: linear-gradient(180deg, #F0E0D6 0%, #DDBDB0 100%);
+  font-size: 12px;
+  padding: 4px 14px;
+}
+
+.presets-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  align-items: center;
+}
+
+.preset-chip {
+  background: #FFF;
+  border: 1px dotted var(--text-primary);
+  color: var(--text-link);
+  font-size: 11px;
+  padding: 2px 6px;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.preset-chip:hover {
+  background: #FFF8EE;
+  color: var(--text-link-hover);
+  border-style: solid;
+}
+
+/* ----------------- Error & Status Boxes ----------------- */
+.chan-box-error {
+  max-width: 680px;
+  margin: 15px auto;
+  background-color: #FFEEEE;
+  border: 1px solid #CC0000;
+  color: #CC0000;
+  padding: 10px 14px;
+  font-weight: bold;
+  font-size: 13px;
+  text-align: center;
+}
+
+.chan-box-loading {
+  max-width: 400px;
+  margin: 20px auto;
+  text-align: center;
+  padding: 14px;
+  background-color: var(--bg-post);
+  border: 1px solid var(--border-dark);
+  font-weight: bold;
+  color: var(--text-primary);
+}
+
+/* ----------------- Thread Info Card (OP Post Style) ----------------- */
+.thread-info-card {
+  max-width: 1400px;
+  margin: 15px auto;
+  padding: 0 15px;
+}
+
+.op-container {
+  background-color: var(--bg-post);
+  border: 1px solid var(--border-post);
+  border-left: 3px solid var(--border-dark);
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.op-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 6px;
+  font-size: 12px;
+}
+
+.op-subject {
+  color: var(--text-subject);
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.op-name {
+  color: var(--text-name);
+  font-weight: bold;
+}
+
+.op-date {
+  color: var(--text-dark);
+}
+
+.op-number {
+  color: var(--text-link);
+}
+
+.op-comment {
+  margin: 8px 0;
+  font-size: 13px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.greentext {
+  color: var(--text-greentext);
+}
+
+/* ----------------- Controls & Filter Bar ----------------- */
+.gallery-controls-bar {
+  max-width: 1400px;
+  margin: 10px auto 16px auto;
+  padding: 8px 15px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--bg-post);
+  border: 1px solid var(--border-post);
+}
+
+.controls-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.controls-label {
+  font-weight: bold;
+  color: var(--text-primary);
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.filter-btn {
+  background: #FFF;
+  border: 1px solid var(--border-dark);
+  color: var(--text-link);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.filter-btn.active {
+  background: var(--text-primary);
+  color: #FFF;
+  border-color: var(--text-primary);
+}
+
+.filter-btn:hover:not(.active) {
+  background: #FFF8EE;
+  color: var(--text-link-hover);
+}
+
+.select-dropdown {
+  background: #FFF;
+  border: 1px solid var(--border-dark);
+  font-family: var(--font-main);
+  font-size: 11px;
+  padding: 2px 4px;
+  color: var(--text-dark);
+  outline: none;
+}
+
+/* ----------------- Gallery Grid ----------------- */
+.gallery-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 15px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.gallery-grid.compact {
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 8px;
+}
+
+/* ----------------- Gallery Item Card (4chan Post Style) ----------------- */
+.chan-card {
+  background-color: var(--bg-post);
+  border: 1px solid var(--border-post);
+  display: flex;
+  flex-direction: column;
+  padding: 6px;
+  position: relative;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.chan-card:hover {
+  border-color: var(--border-dark);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
+  background-color: var(--bg-post-hover);
+}
+
+.chan-file-info {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chan-file-info a {
+  color: var(--text-link);
+  font-weight: bold;
+}
+
+.chan-file-info a:hover {
+  color: var(--text-link-hover);
+}
+
+.chan-thumb-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-color: #ECE0D8;
+  border: 1px solid var(--border-post);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.chan-thumb-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.2s ease;
+}
+
+.chan-card:hover .chan-thumb-img {
+  transform: scale(1.03);
+}
+
+.chan-media-badge {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  background: rgba(175, 10, 15, 0.9);
+  color: #FFF;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 1px 5px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.chan-play-icon-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid #FFF;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFF;
+  pointer-events: none;
+}
+
+.chan-play-icon-overlay::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 7px 0 7px 12px;
+  border-color: transparent transparent transparent #FFFFFF;
+  margin-left: 3px;
+}
+
+.chan-card-footer {
+  margin-top: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.chan-card-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.chan-card-action-link {
+  font-size: 10px;
+  color: var(--text-link);
+}
+
+/* ----------------- Post Stream View ----------------- */
+.post-stream-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.stream-post-item {
+  background-color: var(--bg-post);
+  border: 1px solid var(--border-post);
+  margin-bottom: 12px;
+  padding: 10px 14px;
+}
+
+.stream-post-header {
+  font-size: 12px;
+  margin-bottom: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.stream-post-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media (min-width: 600px) {
+  .stream-post-content {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+.stream-post-media {
+  flex-shrink: 0;
+  max-width: 250px;
+}
+
+.stream-post-text {
+  flex-grow: 1;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* ----------------- Lightbox Modal (4chan Window Style) ----------------- */
+.lightbox-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.82);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  backdrop-filter: blur(2px);
+}
+
+.lightbox-window {
+  background-color: var(--bg-post);
+  border: 2px solid var(--border-dark);
+  max-width: 95vw;
+  max-height: 94vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.lightbox-header {
+  background-color: var(--bg-form-th);
+  border-bottom: 1px solid var(--border-dark);
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--text-primary);
+  font-weight: bold;
+}
+
+.lightbox-title-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lightbox-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.lightbox-body {
+  position: relative;
+  background-color: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 320px;
+  min-height: 240px;
+  max-height: calc(88vh - 80px);
+  overflow: hidden;
+}
+
+.lightbox-media-img {
+  max-width: 90vw;
+  max-height: calc(88vh - 90px);
+  object-fit: contain;
+  display: block;
+}
+
+.lightbox-media-video {
+  max-width: 90vw;
+  max-height: calc(88vh - 90px);
+  outline: none;
+  background: #000;
+}
+
+.lightbox-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(240, 224, 214, 0.85);
+  border: 1px solid var(--border-dark);
+  color: var(--text-primary);
+  font-size: 20px;
+  font-weight: bold;
+  width: 40px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.15s ease;
+  user-select: none;
+}
+
+.lightbox-nav-btn:hover {
+  background: #FFFFFF;
+  color: var(--text-crimson);
+}
+
+.lightbox-nav-btn.prev {
+  left: 8px;
+}
+
+.lightbox-nav-btn.next {
+  right: 8px;
+}
+
+.lightbox-footer {
+  background-color: var(--bg-post);
+  border-top: 1px solid var(--border-post);
+  padding: 6px 12px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 11px;
+}
+
+.lightbox-video-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.speed-btn {
+  background: #FFF;
+  border: 1px solid var(--border-post);
+  font-size: 10px;
+  padding: 1px 5px;
+  cursor: pointer;
+}
+
+.speed-btn.active {
+  background: var(--text-primary);
+  color: #FFF;
+  font-weight: bold;
+}
+
+/* ----------------- Responsive Adjustments ----------------- */
+@media (max-width: 768px) {
+  .board-title {
+    font-size: 22px;
+  }
+  
+  .post-form-table th {
+    width: 80px;
+    font-size: 11px;
+  }
+  
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 8px;
+    padding: 0 8px;
+  }
+
+  .lightbox-nav-btn {
+    width: 32px;
+    height: 40px;
+    font-size: 16px;
+  }
+}
