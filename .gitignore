@@ -1,2 +1,4 @@
-.agents
-__pycache__
+.agents/
+__pycache__/
+*.py[cod]
+.ruff_cache/
