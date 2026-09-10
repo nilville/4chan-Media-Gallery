@@ -1,7 +1,8 @@
 import os
 import re
+
 import requests
-from flask import Flask, jsonify, request, send_from_directory, render_template
+from flask import Flask, jsonify, render_template, request, send_from_directory
 
 # Initialize Flask app
 # Static folder points to frontend dist directory for production builds
@@ -112,9 +113,9 @@ def fetch_4chan_thread(board: str, thread_id: str):
     except requests.exceptions.Timeout:
         return {"error": "Request timed out while connecting to 4chan API.", "code": 504}
     except requests.exceptions.RequestException as e:
-        return {"error": f"Network error: {str(e)}", "code": 502}
-    except Exception as e:
-        return {"error": f"An unexpected error occurred: {str(e)}", "code": 500}
+        return {"error": f"Network error: {e!s}", "code": 502}
+    except Exception as e:  # noqa: BLE001
+        return {"error": f"An unexpected error occurred: {e!s}", "code": 500}
 
 
 @app.after_request
