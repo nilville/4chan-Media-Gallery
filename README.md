@@ -1,6 +1,6 @@
 # 4chan Media Gallery
 
-A lightweight thread viewer and media gallery for 4chan / 4channel, styled in the classic Yotsuba theme.
+A lightweight thread viewer and media gallery for 4chan, styled in the classic Yotsuba theme.
 
 Paste any thread link (or shorthand like `/g/123456`) to pull all images and WebMs from the thread into a clean gallery.
 
@@ -9,7 +9,7 @@ Paste any thread link (or shorthand like `/g/123456`) to pull all images and Web
 - **Multiple view modes** – Switch between a card grid with post snippets, a dense compact thumbnail layout, or a traditional post stream.
 - **Filter & sort** – Quickly filter images vs. WebMs, or sort by thread order, newest, resolution, and file size.
 - **Lightbox player** – Fullscreen viewer with arrow key navigation (`←` / `→`), WebM looping, quick download buttons, and post comments.
-- **Flexible link input** – Accepts full 4chan/4channel URLs or quick shorthands (`/w/123456` or `w/123456`).
+- **Flexible link input** – Accepts full 4chan URLs or quick shorthands (`/w/123456` or `w/123456`).
 - **Referrer handling** – Automatically sets proper headers so 4cdn images load cleanly without 403 Forbidden errors.
 
 ## Tech
