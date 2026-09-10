@@ -1,4 +1,29 @@
-.agents/
+# Python
 __pycache__/
 *.py[cod]
+*$py.class
 .ruff_cache/
+venv/
+.venv/
+env/
+
+# Dependencies & Build artifacts
+node_modules/
+frontend/node_modules/
+dist/
+frontend/dist/
+
+# Vercel & Deployment
+.vercel
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Agent/IDE & OS artifacts
+.agents/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

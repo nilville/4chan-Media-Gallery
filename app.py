@@ -135,6 +135,7 @@ def add_security_headers(response):
 
 
 @app.route("/api/thread", methods=["GET", "POST", "OPTIONS"])
+@app.route("/thread", methods=["GET", "POST", "OPTIONS"])
 def api_thread():
     if request.method == "OPTIONS":
         return jsonify({"status": "ok"}), 200
