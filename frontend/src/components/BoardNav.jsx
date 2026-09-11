@@ -26,6 +26,11 @@ export function BoardNav({ isBottom = false }) {
       <span className="nav-section">
         [ <a href="#top" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>Top</a> / <a href="#bottom" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); }}>Bottom</a> ]
       </span>
+      {isBottom && (
+        <span style={{ fontSize: '10px', color: '#888', marginLeft: '8px' }}>
+          v1.0.1
+        </span>
+      )}
     </div>
   );
 }
