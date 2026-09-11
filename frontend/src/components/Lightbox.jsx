@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { downloadMediaFile } from '../utils/download';
 
 function formatBytes(bytes) {
   if (!bytes || bytes === 0) return '0 B';
@@ -21,6 +22,7 @@ export function Lightbox({
   const videoRef = useRef(null);
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
   const [isLooping, setIsLooping] = useState(true);
+  const [isDownloading, setIsDownloading] = useState(false);
 
   // Keyboard navigation
   useEffect(() => {
@@ -58,6 +60,19 @@ export function Lightbox({
     }
   };
 
+  const handleDownload = async (e) => {
+    e.preventDefault();
+    if (isDownloading) return;
+    setIsDownloading(true);
+    try {
+      await downloadMediaFile(item.url, displayFilename);
+    } catch (err) {
+      console.error('Failed to download media:', err);
+    } finally {
+      setIsDownloading(false);
+    }
+  };
+
   return (
     <div className="lightbox-backdrop" onClick={onClose}>
       <div className="lightbox-window" onClick={(e) => e.stopPropagation()}>
@@ -69,20 +84,22 @@ export function Lightbox({
           </div>
 
           <div className="lightbox-controls">
-            <a
-              href={item.url}
-              download={displayFilename}
+            <button
+              type="button"
               className="chan-button"
-              target="_blank"
-              rel="noreferrer"
+              onClick={handleDownload}
+              disabled={isDownloading}
+              title={`Download ${displayFilename} to your computer`}
+              style={{ cursor: isDownloading ? 'wait' : 'pointer' }}
             >
-              Download
-            </a>
+              {isDownloading ? 'Downloading...' : 'Download'}
+            </button>
             <a
               href={item.url}
               className="chan-button"
               target="_blank"
               rel="noreferrer"
+              title="Open direct file link in new tab"
             >
               Direct Link
             </a>

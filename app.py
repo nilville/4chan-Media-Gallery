@@ -2,7 +2,7 @@ import os
 import re
 
 import requests
-from flask import Flask, jsonify, render_template, request, send_from_directory
+from flask import Flask, jsonify, render_template, request, send_from_directory, Response
 
 # Initialize Flask app
 # Static folder points to frontend dist directory for production builds
@@ -168,6 +168,73 @@ def api_thread():
         }), result.get("code", 400)
 
     return jsonify(result)
+
+
+@app.route("/api/download", methods=["GET", "OPTIONS"])
+@app.route("/download", methods=["GET", "OPTIONS"])
+def api_download():
+    """
+    Proxies 4chan CDN media with Content-Disposition attachment so the browser
+    automatically triggers a file download to disk rather than opening in a new tab.
+    """
+    if request.method == "OPTIONS":
+        return jsonify({"status": "ok"}), 200
+
+    target_url = request.args.get("url", "").strip()
+    filename = request.args.get("filename", "").strip()
+
+    if not target_url:
+        return jsonify({"error": "Missing download URL."}), 400
+
+    from urllib.parse import urlsplit
+    try:
+        parsed = urlsplit(target_url)
+    except Exception:
+        return jsonify({"error": "Invalid URL format."}), 400
+
+    allowed_hosts = ("i.4cdn.org", "is2.4chan.org")
+    if parsed.scheme not in ("http", "https") or parsed.netloc not in allowed_hosts:
+        return jsonify({"error": "Invalid or disallowed media URL."}), 400
+
+    if not filename:
+        filename = parsed.path.split("/")[-1] or "download"
+
+    # Sanitize filename (letters, numbers, dots, dashes, underscores)
+    filename = re.sub(r"[^\w.\-_]", "_", filename).strip()
+    if not filename:
+        filename = "download"
+
+    try:
+        upstream_req = requests.get(
+            target_url,
+            stream=True,
+            timeout=20,
+            headers={
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) 4chan-Gallery/2.0"
+            },
+        )
+
+        if upstream_req.status_code != 200:
+            return jsonify({"error": f"Failed to fetch media from CDN: status {upstream_req.status_code}"}), upstream_req.status_code
+
+        content_type = upstream_req.headers.get("Content-Type", "application/octet-stream")
+        
+        response = Response(
+            upstream_req.iter_content(chunk_size=16384),
+            content_type=content_type,
+            headers={
+                "Content-Disposition": f'attachment; filename="{filename}"',
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Expose-Headers": "Content-Disposition",
+            },
+        )
+        if "Content-Length" in upstream_req.headers:
+            response.headers["Content-Length"] = upstream_req.headers["Content-Length"]
+        return response
+    except requests.exceptions.RequestException as e:
+        return jsonify({"error": f"Download request failed: {e!s}"}), 502
+    except Exception as e:
+        return jsonify({"error": f"Server error: {e!s}"}), 500
 
 
 @app.route("/", defaults={"path": ""})

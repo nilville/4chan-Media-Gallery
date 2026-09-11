@@ -3,7 +3,7 @@ import React from 'react';
 function renderPostComment(rawHtml) {
   if (!rawHtml) return null;
   const text = rawHtml
-    .replace(/<br\s*[\/]?>/gi, '\n')
+    .replace(/<br\s*\/?>/gi, '\n')
     .replace(/<wbr>/gi, '')
     .replace(/&gt;/g, '>')
     .replace(/&lt;/g, '<')

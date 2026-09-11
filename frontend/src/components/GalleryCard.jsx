@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { downloadMediaFile } from '../utils/download';
 
 function formatBytes(bytes) {
   if (!bytes || bytes === 0) return '0 B';
@@ -9,6 +10,7 @@ function formatBytes(bytes) {
 }
 
 export function GalleryCard({ item, onClick, isCompact = false }) {
+  const [isSaving, setIsSaving] = useState(false);
   const {
     tim,
     ext,
@@ -19,13 +21,26 @@ export function GalleryCard({ item, onClick, isCompact = false }) {
     is_video,
     url,
     thumb,
-    no,
-    now
+    no
   } = item;
 
   const displayFilename = filename ? `${filename}${ext}` : `${tim}${ext}`;
   const sizeText = formatBytes(fsize);
   const dimensionText = w && h ? `${w}x${h}` : '';
+
+  const handleSave = async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (isSaving) return;
+    setIsSaving(true);
+    try {
+      await downloadMediaFile(url, displayFilename);
+    } catch (err) {
+      console.error('Save failed:', err);
+    } finally {
+      setIsSaving(false);
+    }
+  };
 
   return (
     <div className={`chan-card ${isCompact ? 'compact' : ''}`}>
@@ -79,22 +94,29 @@ export function GalleryCard({ item, onClick, isCompact = false }) {
         <div className="chan-card-footer">
           <span>No. {no}</span>
           <div className="chan-card-actions">
-            <a
-              href={url}
-              download={displayFilename}
+            <button
+              type="button"
               className="chan-card-action-link"
-              onClick={(e) => e.stopPropagation()}
-              target="_blank"
-              rel="noreferrer"
+              onClick={handleSave}
+              disabled={isSaving}
+              title={`Download ${displayFilename} directly`}
+              style={{
+                background: 'none',
+                border: 'none',
+                padding: 0,
+                font: 'inherit',
+                cursor: isSaving ? 'wait' : 'pointer'
+              }}
             >
-              [Save]
-            </a>
+              {isSaving ? '[Saving...]' : '[Save]'}
+            </button>
             <a
               href={url}
               className="chan-card-action-link"
               onClick={(e) => e.stopPropagation()}
               target="_blank"
               rel="noreferrer"
+              title="Open direct file link in new tab"
             >
               [Direct]
             </a>

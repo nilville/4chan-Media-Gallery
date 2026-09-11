@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { BoardNav } from './components/BoardNav';
 import { BoardHeader } from './components/BoardHeader';
 import { ThreadForm } from './components/ThreadForm';
@@ -28,7 +28,7 @@ export default function App() {
   const [lightboxIndex, setLightboxIndex] = useState(null);
 
   // Fetch thread function
-  const fetchThread = async (urlToFetch) => {
+  const fetchThread = useCallback(async (urlToFetch) => {
     if (!urlToFetch) return;
 
     setIsLoading(true);
@@ -56,13 +56,15 @@ export default function App() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
   // Initial load
   useEffect(() => {
     if (threadUrl) {
+      // oxlint-disable-next-line react/set-state-in-effect
       fetchThread(threadUrl);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleFormSubmit = (newUrl) => {
@@ -202,6 +204,7 @@ export default function App() {
       {/* Lightbox / Fullscreen WebM & Image Player */}
       {activeLightboxItem && (
         <Lightbox
+          key={`${activeLightboxItem.tim}_${activeLightboxItem.no}`}
           item={activeLightboxItem}
           onClose={handleCloseLightbox}
           onPrev={handlePrevMedia}

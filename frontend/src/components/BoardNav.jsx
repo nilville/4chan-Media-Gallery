@@ -1,14 +1,6 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
-const BOARDS = [
-  { group: 'Japanese Culture', boards: ['a', 'c', 'w', 'm', 'cgl', 'cm', 'f', 'n', 'jp', 'vt'] },
-  { group: 'Video Games', boards: ['v', 'vg', 'vm', 'vmg', 'vp', 'vr', 'vrpg', 'vst'] },
-  { group: 'Interests', boards: ['g', 'tv', 'k', 'o', 'an', 'tg', 'sp', 'xs', 'pw', 'sci', 'his', 'int', 'out', 'toy', 'po', 'p', 'ck', 'lit', 'mu', 'fa', '3', 'gd', 'diy', 'wsg', 'qst', 'biz', 'trv', 'fit', 'x', 'adv', 'lgbt', 'mlp', 'news', 'wsr', 'vip'] },
-  { group: 'Creative', boards: ['w', 'wg', 'i', 'ic', 'r', 'r9k', 's4s', 'cm', 'hm', 'y', 'u'] },
-  { group: 'Other', boards: ['b', 'r9k', 'pol', 'bant', 'soc', 's', 'hc', 'hm', 'h', 'e', 'u', 'd', 'y', 't', 'hr', 'gif', 'aco'] }
-];
-
-export function BoardNav({ isBottom = false, onSelectBoard }) {
+export function BoardNav({ isBottom = false }) {
   return (
     <div className={`board-nav-bar ${isBottom ? 'bottom' : ''}`}>
       <span className="nav-section">
@@ -17,7 +9,7 @@ export function BoardNav({ isBottom = false, onSelectBoard }) {
       <span className="nav-section">
         [
         {['a', 'b', 'c', 'd', 'e', 'f', 'g', 'gif', 'h', 'hr', 'k', 'm', 'o', 'p', 'r', 's', 't', 'u', 'v', 'vg', 'vr', 'w', 'wg', 'wsg', 'x', 'pol', 'sci', 'biz', 'tv', 'mu', 'fit'].map((b, idx, arr) => (
-          <React.Fragment key={b}>
+          <Fragment key={b}>
             <a 
               href={`https://boards.4chan.org/${b}/catalog`} 
               target="_blank" 
@@ -27,7 +19,7 @@ export function BoardNav({ isBottom = false, onSelectBoard }) {
               {b}
             </a>
             {idx < arr.length - 1 ? ' / ' : ''}
-          </React.Fragment>
+          </Fragment>
         ))}
         ]
       </span>

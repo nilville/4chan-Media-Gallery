@@ -9,7 +9,7 @@ function renderComment(rawHtml) {
 
   // Replace <br> / <br/> with newline
   const text = rawHtml
-    .replace(/<br\s*[\/]?>/gi, '\n')
+    .replace(/<br\s*\/?>/gi, '\n')
     .replace(/<wbr>/gi, '')
     .replace(/&gt;/g, '>')
     .replace(/&lt;/g, '<')
